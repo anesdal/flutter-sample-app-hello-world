@@ -1,5 +1,6 @@
 name: Build Android APK
 on: [push, workflow_dispatch]
+
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -8,10 +9,9 @@ jobs:
       - uses: subosito/flutter-action@v2
         with:
           channel: 'stable'
-          cache: true
       - run: flutter pub get
-      - run: flutter build apk --release
+      - run: flutter build apk --release --android-skip-build-dependency-validation
       - uses: actions/upload-artifact@v4
         with:
-          name: my-iptv-app
+          name: AnesTV-Release
           path: build/app/outputs/flutter-apk/app-release.apk
